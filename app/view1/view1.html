@@ -1,8 +1,8 @@
-<div  ng-controller = "nsCtrl">
- <h3> New Stories </h3>
+<div  ng-controller = "gtCtrl">
+ <h3> Pending Tasks </h3>
  <table class="table">
-    <tr class="table-striped" ng-repeat = "nsitem in nsitems">
-       <td> <a href="{{ nsitem.url }}"> {{ nsitem.title }}</a> </td>
+    <tr class="table-striped" ng-repeat = "item in items">
+       <td> {{ item.description }} </td>
     </tr>
  </table>
 </div> 

@@ -10,12 +10,12 @@
     var app = angular.module('myApp');
 
     app
-    // Top Stories
-    .factory('tsFactory',['$http',function($http){
+    // getTasks
+    .factory('gtFactory',['$http',function($http){
         var ids = [];
         var tsList = [];
         return {
-            getTopStories : function(){
+            getTasks : function(){
                 return  $http.get('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty').then(function(response){ //wrap it inside another promise using then
                             ids = response.data;
                             var getStoryDetails = function(id){
@@ -36,11 +36,11 @@
         }}}])
 
     // New Stories
-    .factory('nsFactory',['$http',function($http){
+    .factory('ctFactory',['$http',function($http){
         var ids = [];
         var nsList = [];
         return {
-            getNewStories : function(){
+            createTasks : function(){
                 return  $http.get('https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty').then(function(response){ //wrap it inside another promise using then
                             ids = response.data;
                             var getStoryDetails = function(id){
