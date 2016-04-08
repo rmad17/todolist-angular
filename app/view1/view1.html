@@ -1,0 +1,8 @@
+<div  ng-controller = "nsCtrl">
+ <h3> New Stories </h3>
+ <table class="table">
+    <tr class="table-striped" ng-repeat = "nsitem in nsitems">
+       <td> <a href="{{ nsitem.url }}"> {{ nsitem.title }}</a> </td>
+    </tr>
+ </table>
+</div> 
