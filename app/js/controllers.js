@@ -12,9 +12,9 @@
     app.
     //define controller and inject webServices service as dependency.
     // Top Stories
-    controller('gtCtrl',['gtFactory','$scope',function(tsFactory, $scope){
-        tsFactory.getTopStories().then(function(response){
-            $scope.tsitems = response; //Assign data received to $scope.data
+    controller('gtCtrl',['gtFactory','$scope',function(gtFactory, $scope){
+        gtFactory.getTasks().then(function(response){
+            $scope.items = response; //Assign data received to $scope.data
         });
     }]).
     // New Stories
