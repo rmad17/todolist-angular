@@ -6,30 +6,39 @@
  */
 (function(){
   'use strict';
-
     var app = angular.module('myApp');
 
     app.
     //define controller and inject webServices service as dependency.
     // Top Stories
-    controller('gtCtrl',['gtFactory','$scope',function(gtFactory, $scope){
+    controller('gtCtrl',['gtFactory','$scope', 'sharedProperties', function(gtFactory, $scope, sharedProperties){
         gtFactory.getTasks().then(function(response){
             $scope.tasks = response.tasks;
-            //$scope.tags = response.tags;
+            $scope.tags = response.tags;
+            sharedProperties.setTags(response.tags)
+            console.log(sharedProperties.getTags.length)
         });
     }]).
+    //FIXME
+    service('sharedProperties', function () {
+        var tags = [];
+
+        return {
+            getTags: function () {
+                return tags;
+            },
+            setTags: function(value) {
+                tags = value;
+            }
+        };
+    }).
     // Tags
-    controller('tagCtrl', function($scope, $http) {
-                $scope.tags = [
-                    { text: 'just' },
-                    { text: 'some' },
-                    { text: 'cool' },
-                    { text: 'tags' }
-                ];
+    controller('tagCtrl', ['$scope', 'sharedProperties', function($scope, sharedProperties, $http) {
+                $scope.tags = sharedProperties.getTags;
                 $scope.loadTags = function(query) {
                      return $http.get('/tags?query=' + query);
                 };
-    }).
+    }]).
     // New Stories
     controller('ctCtrl',['ctFactory','$scope',function(nsFactory, $scope){
         nsFactory.getNewStories().then(function(response){
