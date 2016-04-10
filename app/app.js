@@ -16,7 +16,8 @@ config(['$routeProvider', function($routeProvider) {
     var app = angular.module('myApp',[
     'ui.bootstrap',
     'myApp.view1',
-    'myApp.version']);
+    'myApp.version',
+    'ngTagsInput']);
 
     app
     .config(['$routeProvider', function($routeProvider) {

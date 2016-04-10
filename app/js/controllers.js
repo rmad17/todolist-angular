@@ -18,6 +18,18 @@
             //$scope.tags = response.tags;
         });
     }]).
+    // Tags
+    controller('tagCtrl', function($scope, $http) {
+                $scope.tags = [
+                    { text: 'just' },
+                    { text: 'some' },
+                    { text: 'cool' },
+                    { text: 'tags' }
+                ];
+                $scope.loadTags = function(query) {
+                     return $http.get('/tags?query=' + query);
+                };
+    }).
     // New Stories
     controller('ctCtrl',['ctFactory','$scope',function(nsFactory, $scope){
         nsFactory.getNewStories().then(function(response){
