@@ -32,3 +32,10 @@
 .color-green{
   background-color: #33cc33;
 }
+
+.glyphicon{
+    display: inline-block;
+    position: absolute;
+    margin-left:0.25em;
+    top: 30%;
+}

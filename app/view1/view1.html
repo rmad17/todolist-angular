@@ -1,8 +1,18 @@
-<div  ng-controller = "gtCtrl">
- <h3> Pending Tasks </h3>
- <table class="table">
-    <tr class="table-striped" ng-repeat = "item in items">
-       <td> {{ item.description }} </td>
-    </tr>
- </table>
+<div class="container-fluid">
+  <form class="form-inline">
+    <div class="form-group">
+      <label class="sr-only" for="exampleAddTask">Task Description</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="exampleInputAmount" placeholder="To Do ...">
+      </div>
+    </div>
+  <button type="submit" class="btn btn-success" ng-click="addItem()"> New Task <span class="glyphicon glyphicon-plus"></span></button>
+  </form>
+</div>
+<div class="container panel">
+</div>
+<div class="panel container" ng-controller = "gtCtrl">
+  <ul class="list-group" ng-repeat = "task in tasks track by $index">
+    <li class="list-group-item"> {{ task.task.description }} </li>
+  </ul>
 </div> 

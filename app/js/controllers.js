@@ -14,7 +14,8 @@
     // Top Stories
     controller('gtCtrl',['gtFactory','$scope',function(gtFactory, $scope){
         gtFactory.getTasks().then(function(response){
-            $scope.items = response; //Assign data received to $scope.data
+            $scope.tasks = response.tasks;
+            //$scope.tags = response.tags;
         });
     }]).
     // New Stories

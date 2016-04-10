@@ -12,11 +12,11 @@
     app
     // getTasks
     .factory('gtFactory',['$http',function($http){
-        var url = "http://localhost:8000/tasks/get_tasks";
+        var url = "http://localhost:8000/tasks/get_tasks/";
         return {
             getTasks : function(){
                 return  $http.get(url).then(function(response){ //wrap it inside another promise using then
-                    return response.data.tasks;
+                    return response.data;
                 });
         }}}])
 
