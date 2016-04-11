@@ -11,15 +11,16 @@
     app.
     //define controller and inject webServices service as dependency.
     // Top Stories
-    controller('gtCtrl',['gtFactory','$scope', 'sharedProperties', function(gtFactory, $scope, sharedProperties){
+    controller('gtCtrl',['gtFactory','$scope', 'sharedProperties','$rootScope' , function(gtFactory, $scope, sharedProperties, $rootScope){
         gtFactory.getTasks().then(function(response){
             $scope.tasks = response.tasks;
             $scope.tags = response.tags;
-            sharedProperties.setTags(response.tags)
-            console.log(sharedProperties.getTags.length)
+            var tags = response.tags;
+            sharedProperties.setTags(response.tags);
+            $rootScope.$broadcast('tagsAdded', tags);
         });
     }]).
-    //FIXME
+    //FIXME move to services.js
     service('sharedProperties', function () {
         var tags = [];
 
@@ -33,12 +34,16 @@
         };
     }).
     // Tags
-    controller('tagCtrl', ['$scope', 'sharedProperties', function($scope, sharedProperties, $http) {
-                $scope.tags = sharedProperties.getTags;
+    controller('tagCtrl', function($scope, $http, sharedProperties, $rootScope) {
+                $scope.$on('tagsAdded', function(event, tags) {
+                    var tags = sharedProperties.getTags();
+                    $scope.tags = sharedProperties.getTags();
+                    console.log(sharedProperties.getTags().length);
+                })
                 $scope.loadTags = function(query) {
                      return $http.get('/tags?query=' + query);
                 };
-    }]).
+    }).
     // New Stories
     controller('ctCtrl',['ctFactory','$scope',function(nsFactory, $scope){
         nsFactory.getNewStories().then(function(response){
