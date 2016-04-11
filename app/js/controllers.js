@@ -16,20 +16,29 @@
             $scope.tasks = response.tasks;
             $scope.tags = response.tags;
             var tags = response.tags;
+            var tasks = response.tags;
             sharedProperties.setTags(response.tags);
             $rootScope.$broadcast('tagsAdded', tags);
+            sharedProperties.setTasks(response.tasks);
+            $rootScope.$broadcast('tasksAdded', tasks);
         });
     }]).
     //FIXME move to services.js
     service('sharedProperties', function () {
         var tags = [];
-
+        var tasks = [];
         return {
             getTags: function () {
                 return tags;
             },
             setTags: function(value) {
                 tags = value;
+            },
+            getTasks: function () {
+                return tasks;
+            },
+            setTasks: function(value) {
+                tasks = value;
             }
         };
     }).
@@ -45,18 +54,27 @@
     }).
     // New Task
     controller('ctCtrl',['ctFactory','$scope',function(ctFactory, $scope){
-        var tags = [];
         var task_description = "";
-        console.log("scope desc:", $scope.description)
         $scope.addItem = function() {
-            debugger;
             task_description = this.description;
-            console.log('User clicked addItem', task_description);
-            console.log('User clicked addItem, tags:', this.tags);
+            var tags = this.tasktags;
+            var data = {'description': task_description, 'tags': tags};
+            ctFactory.createTask(data).then(function(response){
+                $scope.status = response.status; //Assign data received to $scope.data
+            });
         };
-        /*
-        ctFactory.createTask().then(function(response){
-            $scope.nsitems = response; //Assign data received to $scope.data
-        }); */
-    }]);
+    }]).
+    controller('sCtrl',function($scope, sharedProperties){
+        var tasks = [];
+        $scope.$on('tasksAdded', function(event, tasks) {
+            var tasks = sharedProperties.getTasks();
+            console.log(tasks.length);
+        })
+        $scope.search = function() {
+            $scope.tasks = sharedProperties.getTasks();
+            var search_string = this.search_string;
+            var tags = this.tasktags;
+            console.log(search_string);
+        };
+    });
 })();

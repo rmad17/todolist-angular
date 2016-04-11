@@ -24,8 +24,8 @@
     .factory('ctFactory',['$http',function($http){
         var url = "http://localhost:8000/tasks/task/";
         return {
-            createTask : function(){
-                return  $http.post(url).then(function(response){ //wrap it inside another promise using then
+            createTask : function(data){
+                return  $http.post(url, data).then(function(response){ //wrap it inside another promise using then
                             return response;
                 });
         }}}])
