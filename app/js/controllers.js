@@ -69,12 +69,10 @@
         $scope.$on('tasksAdded', function(event, tasks) {
             var tasks = sharedProperties.getTasks();
             console.log(tasks.length);
-        })
-        $scope.search = function() {
             $scope.tasks = sharedProperties.getTasks();
-            var search_string = this.search_string;
-            var tags = this.tasktags;
             console.log(search_string);
-        };
+        })
+            var tags = this.tasktags;
+            var search_string = this.search_string;
     });
 })();
