@@ -1,12 +1,12 @@
-<div class="container-fluid">
+<div class="container-fluid" ng-controller = "ctCtrl">
   <form class="form-inline">
     <div class="form-group">
       <label class="sr-only" for="exampleAddTask">Task Description</label>
       <div class="input-group">
-        <input type="text" class="form-control" id="todo" placeholder="To Do ...">
+        <input type="text" class="form-control" id="todo" placeholder="To Do ..." ng-model="description">
       </div>
       <div class="input-group">
-        <input type="text" class="form-control" id="tags" placeholder="comma seperated tags">
+        <input type="text" class="form-control" id="tags" placeholder="comma seperated tags" ng-model="tags">
       </div>
     </div>
   <button type="submit" class="btn btn-success" ng-click="addItem()"> New Task <span class="glyphicon glyphicon-plus"></span></button>

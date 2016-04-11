@@ -38,16 +38,25 @@
                 $scope.$on('tagsAdded', function(event, tags) {
                     var tags = sharedProperties.getTags();
                     $scope.tags = sharedProperties.getTags();
-                    console.log(sharedProperties.getTags().length);
                 })
                 $scope.loadTags = function(query) {
                      return $http.get('/tags?query=' + query);
                 };
     }).
-    // New Stories
-    controller('ctCtrl',['ctFactory','$scope',function(nsFactory, $scope){
-        nsFactory.getNewStories().then(function(response){
+    // New Task
+    controller('ctCtrl',['ctFactory','$scope',function(ctFactory, $scope){
+        var tags = [];
+        var task_description = "";
+        console.log("scope desc:", $scope.description)
+        $scope.addItem = function() {
+            debugger;
+            task_description = this.description;
+            console.log('User clicked addItem', task_description);
+            console.log('User clicked addItem, tags:', this.tags);
+        };
+        /*
+        ctFactory.createTask().then(function(response){
             $scope.nsitems = response; //Assign data received to $scope.data
-        });
+        }); */
     }]);
 })();
