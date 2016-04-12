@@ -53,14 +53,23 @@
                 };
     }).
     // New Task
-    controller('ctCtrl',['ctFactory','$scope',function(ctFactory, $scope){
+    controller('ctCtrl',['ctFactory','$scope', 'sharedProperties', '$rootScope',function(ctFactory, $scope, sharedProperties, $rootScope){
         var task_description = "";
         $scope.addItem = function() {
             task_description = this.description;
             var tags = this.tasktags;
             var data = {'description': task_description, 'tags': tags};
+            this.description = "";
+            this.tasktags=null;
             ctFactory.createTask(data).then(function(response){
                 $scope.status = response.status; //Assign data received to $scope.data
+                if(response.status==200){
+                    var new_task = {"task":  { "description": task_description}, "task_tags": tags }
+                    var tasks = sharedProperties.getTasks();
+                    tasks.push(new_task)
+                    sharedProperties.setTasks(tasks);
+                    $rootScope.$broadcast('tasksAdded', tasks);
+                }
             });
         };
     }]).
@@ -68,9 +77,7 @@
         var tasks = [];
         $scope.$on('tasksAdded', function(event, tasks) {
             var tasks = sharedProperties.getTasks();
-            console.log(tasks.length);
             $scope.tasks = sharedProperties.getTasks();
-            console.log(search_string);
         })
             var tags = this.tasktags;
             var search_string = this.search_string;
