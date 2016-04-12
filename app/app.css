@@ -40,10 +40,12 @@
     top: 30%;
 }
 .margin-vertical{
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
-.no-margin-vertical{
-    margin-top: 0em;
-    margin-bottom: 0em;
+.margin-top{
+    margin-top: 2.5em;
 }
+.width-no-overflow{
+    width: 200%;
+} 

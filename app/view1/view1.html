@@ -1,24 +1,23 @@
-<div class="container" ng-controller = "ctCtrl">
+<div class="well margin-top" ng-controller = "ctCtrl">
   <form class="form-inline">
     <div class="form-group">
       <label class="sr-only" for="exampleAddTask">Task Description</label>
-      <div class="container input-group">
+      <div class="width-no-overflow input-group">
         <input type="text" class="form-control margin-vertical" id="todo" placeholder="To Do ..." ng-model="description">
       </div>
-      <div class="container input-group">
+      <div class="width-no-overflow input-group">
         <tags-input class="form-control margin-vertical" ng-model="tasktags">
             <!-- <auto-complete source="loadTags($query)"></auto-complete>-->
         </tags-input>
       </div>
-    </div>
   <button type="submit" class="btn btn-success margin-vertical" ng-click="addItem()"> New Task <span class="glyphicon glyphicon-plus"></span></button>
+    </div>
   </form>
 </div>
-<div class="container" ng-controller = "gtCtrl">
+<div class="panel panel-default well margin-vertical" ng-controller = "gtCtrl">
   <div class=""  ng-controller="sCtrl">
-    <input type="text" class="form-control margin-vertical" id="search" placeholder="Search ..." ng-model="search_string">
-    <hr/>
-   <div> 
+    <input type="text" class="width-no-overflow text-center form-control margin-vertical" id="search" placeholder="search by task name or tags..." ng-model="search_string">
+   <div class="panel-body"> 
       <h2 class="text-center"> <strong> Tasks in your stack </strong> </h2>
       <ul class="list-group" ng-repeat = "task in tasks | filter:search_string">
         <li class="list-group-item no-margin-vertical"> {{ task.task.description }} </li>
